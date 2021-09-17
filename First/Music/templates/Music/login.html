@@ -1,0 +1,56 @@
+<!-- <form action="" method='POST' >
+    {% csrf_token %}
+    <input type="text" name="user" placeholder="username" ><br><br>
+    <input type="password" name="password" placeholder="password"><br><br>
+    <input type="submit" value="LOGIN">
+</form> -->
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'cssf/style.css' %}">
+</head>
+<body>
+
+    <div class="main" style="padding: 55px 44px 55px 0px;">
+        <div class="container" style="width: 651px;">
+            <div class="booking-content" style="width: 734px;">
+                <div class="booking-image" style="height: 40.33%;">
+                    <img class="booking-img" style="height: 540px; width: 100%;" src="{% static 'images/9.jpg' %}" alt="Booking Image">
+                </div>
+                <div class="booking-form" style="height: 540px;">
+                    <form id="booking-form"  method="POST" style="padding: 25px 35px 70px 35px;">
+                        {% csrf_token %}
+                        <h2>لطفا وارد شوید</h2>
+                        <div class="form-group form-input" style="padding-top: 30px;">
+                            <input type="text" name="user" id="name" placeholder="user" required/>
+                        </div>
+                        <div class="form-group form-input" style="padding-top: 30px;">
+                            <input type="password" name="password" placeholder="password" required />
+                        </div>
+                        <div class="form-submit" style="padding-top: 20px;">
+                            <input type="submit" value="ورود" class="submit" id="submit" name="submit" style="margin: 45px 16px 26px 45px;font-size: 20px;padding: 10px 40px;"  />
+                            <a href="{% url 'Music:signup' %}" style="text-decoration: none;" class="vertify-booking">ثبت نام نکرده اید؟</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}' %}"></script>
+    <script src="{% static 'jsf/main.js' %}"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

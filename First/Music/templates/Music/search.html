@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="page-heading">
+        <div class="container">
+            <div class="heading-content">
+                  <h1>{{text}} <em>: جستجوی</em></h1>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="blog-entries">
+        <div class="container">
+            <div class="col-md-9">
+                <div class="blog-posts">
+                    <div class="row">
+                        {% for blogs in search %}
+                            <div class="col-md-6">
+                                <div class="blog-post">
+                                    <img src="{{ blogs.Image.url }}" style="height: 249px;width: 92%;" alt="">
+                                    <div class="text-content">
+                                        <span><a href="#">{{ blogs.Author }}</a> / <a href="#">{{ blogs.Time }}</a> / <a href="{{blogs.Category}}">{{blogs.Category}}
+                                        </a> / <a href="#">view {{blogs.hit.count}} </a></span>
+                                        <h2>{{blogs.Title}}</h2>
+                                        <p>{{blogs.Description|truncatewords:"5"}}
+                                        <br><br></p>
+                                        <div class="simple-btn">
+                                            <a href="{% url 'Music:comment' blogs.pk %}">ادامه مطلب</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                            <!-- <div class="col-md-12">
+                                <ul class="page-number">
+                                    {% if page_obj.has_previous %}
+                                        <li class="active"> </li>
+                                        <li><a href="?page={{ page_obj.previous_page_number }}">1</a></li>
+                                    {% endif %}
+                                    {% if page_obj.has_next %}
+                                        <li><a href="?page={{ page_obj.next_page_number }}">2</a></li>
+                                    {% endif %}    
+                                </ul>
+                            </div> -->
+                    </div>
+                </div>
+            </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer>
+        <div class="container-fluid">
+            <div class="col-md-12">
+                <p>Copyright &copy; 2018 Company Name 
+    
+    | Designed by TemplateMo</p>
+            </div>
+        </div>
+    </footer>
+
+    {% endblock %}
+    
+

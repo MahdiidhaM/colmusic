@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="page-heading">
+        <div class="container">
+            <div class="heading-content">
+                <h1>CALMUZIC</h1>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="blog-entries">
+        <div class="container">
+            <div class="col-md-9">
+                <div class="blog-posts">
+                    <div class="row">
+                        {% for blog in object_list %}
+                            {% if blog.Boolean %}
+                                <div class="col-md-6">
+                                    <div class="blog-post">
+                                        <img src="{{ blog.Image.url }}" style="width: 350px ; height: 215px;" alt="">
+                                        <div class="text-content">
+                                            <span><a href="{{ blog.Author }}">{{ blog.Author }}</a> / <a href="#">{{ blog.Time }}</a> / <a href="{{blog.Category}}">{{blog.Category}}
+                                            </a> / <a href="#">view {{blog.hit.count}} </a></span>
+                                            <h2>{{blog.Title}}</h2>
+                                            <p>{{blog.Description|truncatewords:"5"}}
+                                            <br><br></p>
+                                            <div class="simple-btn">
+                                                {% if user.is_authenticated %}
+                                                    <a href="{% url 'Music:comment' blog.pk %}">ادامه مطلب</a>
+                                                {% else %}
+                                                    <a href="{% url 'Music:login' %}">لطفا لاگین کنید</a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>   
+                                </div>
+                            {% else %}
+                                <div class="col-md-6">
+                                    <div class="blog-post">
+                                        <img src="{{ blog.Image.url }}" style="width: 350px ; height: 215px;" alt="">
+                                        <div class="text-content">
+                                            <span><a href="{{ blog.Author }}">{{ blog.Author }}</a> / <a href="#">{{ blog.Time }}</a> / <a href="{{blog.Category}}">{{blog.Category}}
+                                            </a> / <a href="#">view {{blog.hits.count}} </a></span>
+                                            <h2>{{blog.Title}}</h2>
+                                            <p>{{blog.Description|truncatewords:"5"}}
+                                            <br><br></p>
+                                            <div class="simple-btn">
+                                                <a href="{% url 'Music:comment' blog.pk %}">ادامه مطلب</a>
+                                            </div>
+                                        </div>
+                                    </div>   
+                                </div>
+                            {% endif %} 
+                        {% endfor %}
+                            <!-- <div class="col-md-12">
+                                <ul class="page-number">
+                                    {% if page_obj.has_previous %}
+                                        <li class="active"> </li>
+                                        <li><a href="?page={{ page_obj.previous_page_number }}">1</a></li>
+                                    {% endif %}
+                                    {% if page_obj.has_next %}
+                                        <li><a href="?page={{ page_obj.next_page_number }}">2</a></li>
+                                    {% endif %}    
+                                </ul>
+                            </div> -->
+                            <div class="col-md-12">
+                                <ul class="page-number">
+                                        <!-- <ul class="pagination"> -->
+                                            {% if page_obj.has_previous %}
+                                                <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                                            {% else %}
+                                                <li class="disabled"><a><span>&laquo;</span></a></li>
+                                            {% endif %}
+                                            {% for i in paginator.page_range %}
+                                                {% if page_obj.number == i %}
+                                                    <li class="lis"><a>&laquo;{{i}}&raquo;</a></li>
+                                                {% else %}
+                                                    <li style="background-color: blue;"><a href="?page={{ i }}">{{ i }}</a></li>
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% if page_obj.has_next %}
+                                                <li style="background-color: blue;"><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                                            {% else %}
+                                                <li class="disabled"> <a><span>&raquo;</span></a></li>
+                                            {% endif %}
+                                </ul>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="side-bar">
+                    <form action="{% url 'Music:search' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="search">
+                            <fieldset>
+                                <input name="search" type="text" class="form-control" placeholder="Search..." required>
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </fieldset>
+                        </div>
+                    </form>
+                    
+                    </div>
+                    
+                    
+                    <div class="recent-posts">
+                        <div class="sidebar-heding">
+                            <h2 style="direction:rtl;text-align:right;">آهنگ های پربازدید</h2>
+                        </div>
+                        <ul>
+                            {% for s in main %}
+                                <li><a href="{% url 'Music:comment' s.pk %}" >
+                                    <img src="{{ s.Image.url }}" style="width: 71px; height: 60px;" alt="Recent Post 1">
+                                    <div class="text">
+                                        <h6>{{ s.Title }}</h6>
+                                        <span>{{s.Time}}</span>
+                                    </div>
+                                </li></a>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="recent-posts">
+                        <div class="sidebar-heding">
+                            <h2 style="direction:rtl;text-align:right;">اهنگ های اخیر</h2>
+                        </div>
+                        <ul>
+                            {% for date in object_list %}
+                                <li><a href="{% url 'Music:comment' date.pk %}">
+                                    <img src="{{ date.Image.url }}" style="width: 71px; height: 60px;" alt="Recent Post 1">
+                                    <div class="text">
+                                        <h6>{{ date.Title }}</h6>
+                                        <span>{{date.Time}}</span>
+                                    </div>
+                                </li></a>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="categories">
+                        <div class="sidebar-heding">
+                            <h2 style="direction:rtl;text-align:right;">دسته بندی ها</h2>
+                        </div>
+                        <ul> 
+                            <li><a href="{% url 'Music:dep' %}">Dep</a></li>
+                            <li><a href="{% url 'Music:deephouse' %}">Deephouse</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer>
+        <div class="container-fluid">
+            <div class="col-md-12">
+                <p>Copyright &copy; 2018 Company Name 
+    
+    | Designed by TemplateMo</p>
+            </div>
+        </div>
+    </footer>  
+
+    {% endblock %}
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load comment_tags %}
+{% render_comments obj request %}
+{% include_bootstrap %}
+<nav>
+    <div class="logo">
+        <a href="index.html">Gala<em>xy</em></a>
+    </div>
+  <div class="menu-icon">
+    <span></span>
+  </div>
+</nav>
+<div class="blog-entries">
+    <div class="container">
+        <div class="col-md-9">
+            <div class="blog-posts">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="blog-post">
+                            <img src="{{ object.Image.url }}" alt="">
+                            <div class="text-content">
+                                <span><a href="#">{{ object.Author }}</a> / <a href="#">16 September 2018</a> / <a href="#">{{object.Category}}</a></span>
+                                <h2>{{object.Title}}</h2>
+                                <p>{{object.Description}}</p>
+                                <br><br>
+                                <div class="simple-btn">
+                                    {% if user.is_superuser or user == object.Author %}
+                                        <a href="{% url 'Music:update' object.pk %}">update</a>       
+                                    {% endif %}                             
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'cssf/style.css' %}">
+</head>
+<body>
+
+    <div class="main">
+
+        <div class="container">
+            <div class="booking-content">
+                <div class="booking-image" style="margin-left: 0px">
+                    <img class="booking-img"  src="{% static 'images/5.jpg' %}"  style="height: 655px; width: 584px;"  alt="Booking Image">
+                </div>
+                    <div class="booking-form">
+                        <form id="booking-form" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <h2>لطفا اطلاعات آهنگ خود را وارد کنید</h2>
+                            <div class="form-group form-input">
+                                {{form.Title|attr:"placeholder=nameMusic"}}
+                            </div>
+                            <div class="form-group form-input">
+                                {{form.Description|attr:"placeholder=nameArtist"}}
+                            </div> 
+                            <div class="form-group form-input">
+                                {{form.Image}}
+                                <label for="phone" class="form-label">Image:</label>
+                            </div>
+                            <div class="form-group form-input">
+                                {{form.File}}
+                                <label for="phone" class="form-label">File:</label>
+                            </div>
+                            <div class="form-group form-input">
+                                {{form.Time}}
+                                <label for="phone" class="form-label">File:</label>
+                            </div>
+                            <div class="form-group">
+                                <div class="select-list">
+                                    {{form.Category}}
+                                    <label for="phone" style="margin-left: 232px; top: 0; font-size: 14px;"  class="form-label">دسته بندی</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="select-list">
+                                    {{form.Author}}
+                                    <label for="phone" style="margin-left: 242px; top: 0; font-size: 14px;" class="form-label">نویسنده</label>
+                                </div>
+                            </div>
+                            <div class="form-group form-input">
+                                <div style="margin:20px 0px 0px 0px;" ><p style="margin:-20px 0px 0px 60px;">آهنگ ویژه</p> <p style="margin: -23px 0px 0px 171px;">{{form.Boolean}}</p></div>
+                            </div>
+                            <!-- <div class="form-group" style="margin-top: 15px; border-bottom: none;">
+                                <input type="submit" value="send">
+                            </div> -->
+                            <div class="form-submit">
+                                <input type="submit" style="margin-left:85px" value="Send" class="submit" id="submit" name="submit" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- JS -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'jsf/main.js' %}"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

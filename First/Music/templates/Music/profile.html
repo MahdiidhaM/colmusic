@@ -1,0 +1,60 @@
+{% load static %}
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ProFile</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static 'fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'cssf/style.css' %}">
+</head>
+<body>
+
+    <div class="main" style="padding: 75px 8px;">
+
+        <div class="container" style="width: 975px;">
+            <div class="booking-content">
+                <div class="booking-image">
+                    <img class="booking-img" style="height: 500px;" src="{% static 'images/11.jpg' %}" alt="Booking Image">
+                </div>
+                    <div class="booking-form" style="height:500px ; width: 40.67%">
+                        <form id="booking-form" method="POST" enctype="multipart/form-data" style="padding: 25px 37px 70px 37px;">
+                            {% csrf_token %}
+                            <h2>ProFile</h2>
+                            <div class="form-group form-input">
+                                {{form.username|attr:"placeholder=username"}}
+                            </div>
+                            <div class="form-group form-input">
+                                {{form.first_name|attr:"placeholder=firstname"}}
+                            </div> 
+                            <div class="form-group form-input">
+                                {{form.last_name|attr:"placeholder=lastname"}}
+                                <label for="phone" class="form-label"></label>
+                            </div>
+                            <div class="form-group form-input">
+                                {{form.email|attr:"placeholder=lastname"}}
+                                <label for="phone" class="form-label"></label>
+                            </div>
+                            <div class="form-group form-input">
+                                <div style="margin:20px 0px 0px 0px;" ><p style="margin:-20px 0px 0px 50px;" >به اشتراک گذاشتن اهنگ </p> <p style="margin: -20px 0px 0px 120px;">{{form.author}}</p></div>
+                            </div>
+                                <div class="form-submit">
+                                    <input type="submit" value="آپدیت" class="submit" id="submit" name="submit" style="margin: 52px 16px 26px 110px;font-size: 18px;padding: 9px 38px;"  />
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- JS -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'jsf/main.js' %}"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    
+
+    <div id="video-container">
+        <div class="video-overlay"></div>
+        <div class="video-content">
+            <div class="inner">
+              <h1>Welcome to <em>Calmusic</em></h1>
+              <p>سایتی برای آهنگ های برتر CALMUZIC</p>
+              <p>آهنگ های خودتان را به اشتراک بگذارید</p>
+              <div class="form-submit">
+                <a href="{% url 'Music:List_Blog' %}" style="text-decoration: none;" type="submit" class="submit" id="submit" name="submit">لیست کامل </a>
+            </div>
+                <div class="scroll-icon">
+                    <a class="scrollTo" data-scrollTo="portfolio" href="#"><img src="{% static 'img/scroll-icon.png' %}" alt=""></a>
+                </div>    
+            </div>
+        </div>
+        <video autoplay loop muted>
+        	<source src="{% static 'highway-loop.mp4' %}" type="video/mp4" />
+        </video>
+    </div>
+
+    <div class="grid-portfolio" id="portfolio">
+      <div class="container">
+          <div class="row">
+            {% for blog in object_list %}
+              <div class="col-md-4 col-sm-6">
+                  <div class="portfolio-item">
+                      <div class="thumb">
+                          <a href="{% static 'img/big_portfolio_item_4.jpg' %}" data-lightbox="image-1"><div class="hover-effect">
+                              <div class="hover-content">
+                                  <h1>{{blog.Title}}</h1>
+                                  <p><a href="{% url 'Music:comment' blog.pk %}">بیشتر</a></p>
+                              </div>
+                          </div></a>
+                          <div class="image">
+                            <img src="{{ blog.Image.url }}" style="width: 305px ; height: 170px; border-radius: 20px;">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="load-more-button">
+                      <a href="{% url 'Music:List_Blog' %}">بیشتر</a>
+                  </div>
+              </div>
+          </div>
+          
+      </div>
+  </div>
+
+
+    <footer>
+        <div class="container-fluid">
+            <div class="col-md-12">
+                <p>Copyright &copy; 2018 Company Name 
+    
+    | Designed by TemplateMo</p>
+            </div>
+        </div>
+    </footer>
+
+ 
+
+
+{% endblock %}
