@@ -1,0 +1,16 @@
+<div class="recent-posts">
+    <div class="sidebar-heding">
+        <h2 style="direction:rtl;text-align:right;">آهنگ های پربازدید</h2>
+    </div>
+    <ul>
+        {% for s in View %}
+            <li><a href="{% url 'Music:comment' s.pk %}" >
+                <img src="{{ s.Image.url }}" style="width: 71px; height: 60px;" alt="Recent Post 1">
+                <div class="text">
+                    <h6>{{ s.Title }}</h6>
+                    <span>{{s.Time}}</span>
+                </div>
+            </li></a>
+        {% endfor %}
+    </ul>
+</div>

@@ -24,13 +24,13 @@ def index(request):
 #         return context
 
 class List_Blog(ListView):
-    queryset = Blog.objects.all().order_by('-Time')
+    model=Blog
     paginate_by = 8
     template_name = 'Music/blog.html'
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['main'] = Blog.objects.all().annotate(count=Count('hits')).order_by('-count')[:5]
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['main'] = Blog.objects.all().annotate(count=Count('hits')).order_by('-count')[:5]
+    #     return context
 
 
 class Listspecial(ListView):

@@ -1,0 +1,11 @@
+
+<div class="categories">
+    <div class="sidebar-heding">
+        <h2 style="direction:rtl;text-align:right;">دسته بندی ها</h2>
+    </div>
+    {% for cat in category %}
+    <ul> 
+        <li><a href="">{{cat.Category}}</a></li>
+    </ul>
+    {% endfor %}
+</div>

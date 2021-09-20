@@ -14,7 +14,7 @@ class UpdateMixsin():
 class CreateMxsin():
     def dispatch(self,request,*args,**kwargs):
         # model = User.objects.get(author=True)
-        if request.user.is_superuser or request.user.is_staff :
+        if request.user.is_superuser or request.user.author :
             return super().dispatch(request,*args,**kwargs)
         else:
             return HttpResponseRedirect(reverse('Music:error'))
